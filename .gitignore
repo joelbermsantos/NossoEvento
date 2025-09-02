@@ -103,3 +103,8 @@ $RECYCLE.BIN/
 
 # Linux
 *~
+
+# Ignorar banco SQLite
+*.db
+*.db-shm
+*.db-wal
