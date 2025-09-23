@@ -10,7 +10,7 @@ using NossoEvento.API.Entidade;
 namespace NossoEvento.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
         private readonly DataContext _context;
