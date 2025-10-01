@@ -36,19 +36,17 @@
 </table> -->
 
 <!-- Código para rodar no bootstrap 5 -->
-<form class="row row-cols-lg-auto g-3 align-items-center" action="">
-  <div>
-    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="Digite para buscar..." />
-    </div>
-  </div>
-  <div>
-    <button type="submit" class="btn btn-outline-success">Buscar</button>
-  </div>
-</form>
+<div class="d-flex align-items-center mb-3">
+  <label class="me-2 mb-0"><strong>Filtro:</strong></label>
+  <input type="text" class="form-control me-2" style="width: 250px;" placeholder="Digite para buscar..." [(ngModel)]="filtroLista" />
+  <button type="button" class="btn btn-outline-secondary" (click)="filtroLista=''"
+    [disabled]="!filtroLista">
+    X
+  </button>
+</div>
 
-<br>
+<!-- <br> -->
+<!-- <h3>Filtro: {{ filtroLista }}</h3> -->
 
 <table class="table">
   <thead class="table-dark">
@@ -64,10 +62,11 @@
       <th>Qtd Pessoas</th>
       <th>Lote</th>
       <th>Local</th>
+      <th>Opções</th>
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let evento of eventos">
+    <tr *ngFor="let evento of eventosFiltrados">
       <td class="text-center">
         <img [collapse]="exibirImagem" [isAnimated]="true" src="/assets/{{evento.imagemUrl}}" alt=""
         [style.width.px]="larguraImagem"
@@ -80,9 +79,13 @@
       <td >{{evento.qtdPessoas}}</td>
       <td >{{ evento.lote}}</td>
       <td >{{evento.local}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm me-2">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+      </td>
     </tr>
   </tbody>
-  <tbody *ngIf="eventos && !eventos.length">
+  <tbody *ngIf="eventosFiltrados && !eventosFiltrados.length">
     <tr>
       <td colspan="7" class="text-center">
         <h4>Nenhum evento encontrado!</h4>
